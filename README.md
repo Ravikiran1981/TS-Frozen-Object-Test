@@ -109,5 +109,3 @@ Run all tests:
 npm test
 Run tests in watch mode (for development):
 npm run test:watch
-
-export type FrozenObject<T> = DeepReadonly<T> & T;
