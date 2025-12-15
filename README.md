@@ -14,13 +14,15 @@ The goal was to create a generic type `FrozenObject<T>` with three requirements:
 The solution uses an Intersection Type strategy. By intersecting the original type `T` with a recursive Readonly Mapped Type, 
 we satisfy both the strict safety check and the structural compatibility check.
 
-type DeepReadonly<T> =
-  T extends (...args: any[]) => infer R
-    ? (...args: any[]) => DeepReadonly<R>
-    : T extends readonly (infer U)[]
-      ? ReadonlyArray<DeepReadonly<U>>
-      : T extends object
-        ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
+  type DeepReadonly<T> =
+    T extends (...args: any[]) => infer R
+      ? (...args: any[]) => DeepReadonly<R>
+      : T extends readonly (infer U)[]
+        ? ReadonlyArray<DeepReadonly<U>>
+        : T extends object
+          ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
+          : T;
+  export type FrozenObject<T> = DeepReadonly<T> & T;
 
 **Key Insight**
 
@@ -100,13 +102,12 @@ cd ts-frozen-object-test
 Install dependencies:
 npm install: 
 
-Running Tests
+**Running Tests**
 This project uses Jest with ts-jest for testing. The tests cover positive cases (reading values), negative cases (assigning values), and interoperability.
 
 Run all tests:
 npm test
 Run tests in watch mode (for development):
 npm run test:watch
-        : T;
 
 export type FrozenObject<T> = DeepReadonly<T> & T;
