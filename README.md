@@ -1,7 +1,7 @@
 ***TypeScript FrozenObject Type***
 
-This repository contains a solution to a specific TypeScript type: designing a `FrozenObject<T>` type that enforces deep immutability 
-at compile time while maintaining compatibility with existing code that expects mutable types.
+This repository contains a implementation to a specific TypeScript type: 
+Designing a `FrozenObject<T>` type that enforces deep immutability at compile time while maintaining compatibility with existing code that expects mutable types.
 
 The goal was to create a generic type `FrozenObject<T>` with three requirements:
 
